@@ -7,8 +7,14 @@ const blogRoute = require('./Routes/blogsRoute')
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); 
 const PORT = process.env.PORT || 3000
+const cors = require('cors')
+const corsOptions = {
+    origin: ['http://blogify.netlify.app'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+};
 
-
+app.use(cors(corsOptions)); 
 
 const passport = require('passport');
 
