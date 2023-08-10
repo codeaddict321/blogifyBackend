@@ -21,6 +21,9 @@ const passport = require('passport');
 const connectDB = require('./database/connect');
 
 connectDB()
+app.get('/',(req,res)=>{
+    res.send('hi')
+})
 app.use('/login',loginRoute)
 app.use('/register',registerRoute)
 app.use('/blogs',blogRoute)
