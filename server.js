@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const verifyJwt = require('./middleware/verifyJwt');
 const registerRoute = require('./Routes/registerRoute');
 const mongoose= require('mongoose');
 const loginRoute = require('./Routes/loginRoute')
@@ -22,9 +23,11 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-const passport = require('passport');
 
-const connectDB = require('./database/connect');
+const manageRoles = require('./middleware/manageRoles');
+
+
+
 
 connectDB()
 app.get('/',(req,res)=>{
@@ -34,7 +37,11 @@ app.use('/login',loginRoute)
 app.use('/register',registerRoute)
 
 app.use('/blogs',blogRoute)
-
+app.get('/role', verifyJwt, manageRoles('GET'), (req, res) => {
+  // Handle the GET request for the user's role
+  const userRole = req.user.role;
+  res.json({ role: userRole });
+});
 
 mongoose.connection.once('open',()=>{
   
