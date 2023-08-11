@@ -7,26 +7,21 @@ const blogRoute = require('./Routes/blogsRoute')
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); 
 const PORT = process.env.PORT || 3000
-const cors = require('cors')
+const allowedOrigins = ['http://localhost:5173', 'https://www.blogify.netlify.app'];
+
 const corsOptions = {
-    origin: ['http://www.blogify.netlify.app','http://localhost:5173'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
 };
 
-app.use(cors(corsOptions)); 
-app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:5173', 'https://www.blogify.netlify.pp', ];
-
-  const origin = req.headers.origin;
-
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-  next();
-});
+app.use(cors(corsOptions));
 const passport = require('passport');
 
 const connectDB = require('./database/connect');
