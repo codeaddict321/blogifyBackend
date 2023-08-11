@@ -9,7 +9,8 @@ app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); 
 const PORT = process.env.PORT || 3000
 const allowedOrigins = ['http://localhost:5173', 'https://www.blogify.netlify.app'];
-const cors = require('cors')
+const cors = require('cors');
+const connectDB = require('./database/connect')
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
