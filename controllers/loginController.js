@@ -18,7 +18,8 @@ const controller = async (req, res) => {
            
 
               const token = jwt.sign(payload,ACCESS_TOKEN_SECRET)
-              res.json({token,role:user.role})
+              res.json({token})
+           
            
   
   

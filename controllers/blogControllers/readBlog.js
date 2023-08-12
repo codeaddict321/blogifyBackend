@@ -6,6 +6,8 @@ const controller = async (req,res)=>{
             {
                 $project: {
                     _id: 1,
+                    author:1,
+                    timestamp:1,
                     content: {
                         $split: ['$content', ' ']
                     }
@@ -14,6 +16,8 @@ const controller = async (req,res)=>{
             {
                 $project: {
                     _id: 1,
+                    author:1,
+                    timestamp:1,
                     limitedContent: {
                         $slice: ['$content', 50]
                     }
