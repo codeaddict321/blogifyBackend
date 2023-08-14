@@ -24,7 +24,8 @@ const controller = async (req,res)=>{
                 }
             }
         ];
-        const limitedData = await Blog.aggregate(pipeline);   
+        const limitedData = await Blog.aggregate(pipeline); 
+          console.log(limitedData);
         res.json({ data: limitedData });     
  
     } catch(err){
