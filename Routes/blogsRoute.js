@@ -5,7 +5,8 @@ const readBlog = require('../controllers/blogControllers/readBlog')
 const writeBlog = require('../controllers/blogControllers/writeBlog');
 const manageRoles = require('../middleware/manageRoles')
 const deleteBlog = require('../controllers/blogControllers/deleteBlog');
-const singleBlog = require('../controllers/blogControllers/singleBlog');
+
+const singleBlog = require('../controllers/blogControllers/singleBlog')
 const updateBlog = require('../controllers/blogControllers/updateBlog')
 router.route('/')
      .get(verifyJwt,readBlog)
