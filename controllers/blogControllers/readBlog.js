@@ -7,7 +7,8 @@ const controller = async (req,res)=>{
                 $project: {
                     _id: 1,
                     author:1,
-                    timestamp:1,
+                    createdAt:1,
+                    title:1,
                     content: {
                         $split: ['$content', ' ']
                     }
@@ -17,7 +18,8 @@ const controller = async (req,res)=>{
                 $project: {
                     _id: 1,
                     author:1,
-                    timestamp:1,
+                    createdAt:1,
+                    title:1,
                     limitedContent: {
                         $slice: ['$content', 50]
                     }
@@ -25,7 +27,7 @@ const controller = async (req,res)=>{
             }
         ];
         const limitedData = await Blog.aggregate(pipeline); 
-          console.log(limitedData);
+         
         res.json({ data: limitedData });     
  
     } catch(err){
